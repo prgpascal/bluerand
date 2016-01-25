@@ -24,7 +24,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.nio.charset.Charset;
 import java.lang.Math;
-
+ 
 
 public class BlueRand {
     

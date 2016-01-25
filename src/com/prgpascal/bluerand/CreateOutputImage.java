@@ -30,7 +30,7 @@ import java.awt.image.Raster;
 import java.lang.Math;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
-
+ 
 
 public class CreateOutputImage {
     // Input / Output
