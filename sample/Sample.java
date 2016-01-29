@@ -15,12 +15,13 @@
  */
  
 import java.util.ArrayList;
-import com.prgpascal.bluerand.BlueRand; 
+import com.prgpascal.bluerand.BlueRand;
+import com.prgpascal.bluerand.BlueRandException; 
 
 
 /**
  * Sample class for BlueRand.
- * It provides a sample of Single Run test and Multiple Runs test.
+ * It provides samples for single and multiple runs.
  */
 public class Sample {    
     
@@ -36,7 +37,7 @@ public class Sample {
     
     /**
      * Execute a single run test (2 input images only).
-     * The output will be stored inside "singleRun_ab.txt" and "singleRun_ab.bmp".
+     * The output will be stored into "singleRun_ab.txt" and "singleRun_ab.bmp".
      */
     public static void singleRunTest(){    	
         BlueRand random = new BlueRand("sample/input/a.jpg", "sample/input/b.jpg");
@@ -44,17 +45,22 @@ public class Sample {
         random.setOutputFile("sample/output/singleRun_ab.txt");
         random.createOutputImage(true);
         random.setOutputImage("sample/output/singleRun_ab.bmp");
+        random.deleteInputFiles(false);
         
-        System.out.println("Single run started, please wait... ");
-        ArrayList<Byte> output = random.generateRandom();
-        System.out.println("Single run finished. Bytes generated: " + output.size());
+        try {
+	        System.out.println("Single run started, please wait... ");
+	        ArrayList<Byte> output = random.generateRandom();
+	        System.out.println("Single run finished. Bytes generated: " + output.size());
+        } catch(BlueRandException e){
+        	System.out.println(e.getMessage());
+        }
     }
     
     
     /**
-     * Execute a multiple runs test (more than 2 input images).
-     * Append the output of each generation to the same output Files,
-     * named "multiRuns_output.txt" and "multiRuns_output.bmp".
+     * Make a multiple run (with more than 2 input images).
+     * It appends the output of each generation to the output files named "multiRuns_output.txt" 
+     * and "multiRuns_output.bmp".
      */
     public static void multiRunTest(){
         /* Input resources.
@@ -73,16 +79,19 @@ public class Sample {
         random.createOutputImage(true);
         random.overwriteOutputFile(false);
         random.setOutputImage("sample/output/multiRuns_output.bmp");
-        
+        random.deleteInputFiles(false);  
         
         ArrayList<Byte> output = null;
-        for (String s : inputs){
-            random.setInputImages("sample/input/"+s.charAt(0)+".jpg",
-                                  "sample/input/"+s.charAt(1)+".jpg");
-                                  
-            System.out.println("Multiple runs started, please wait...");
-            output = random.generateRandom();
-            System.out.println("run finished... Bytes generated: " + output.size());
+        try {
+	        for (String s : inputs){
+	            random.setInputImages("sample/input/"+s.charAt(0)+".jpg",
+	                                  "sample/input/"+s.charAt(1)+".jpg");      
+	            System.out.println("Multiple runs started, please wait...");
+	            output = random.generateRandom();
+	            System.out.println("run finished... Bytes generated: " + output.size());
+	        }
+        } catch (BlueRandException e){
+        	System.out.println(e.getMessage());
         }
         System.out.println("Multiple runs finished.");
     }
