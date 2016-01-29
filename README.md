@@ -37,17 +37,18 @@ random.deleteInputFiles(true);
 ##Tests
 An [ENT](http://www.fourmilab.ch/random/) test result:
 ```
-Entropy = 7.998091 bits per byte.
+Entropy = 7.998236 bits per byte.
 
 Optimum compression would reduce the size
-of this 95817 byte file by 0 percent.
+of this 95764 byte file by 0 percent.
 
-Chi square distribution for 95817 samples is 253.11, and randomly
-would exceed this value 52.16 percent of the times.
+Chi square distribution for 95764 samples is 235.18, and randomly
+would exceed this value 80.83 percent of the times.
 
-Arithmetic mean value of data bytes is 127.7242 (127.5 = random).
-Monte Carlo value for Pi is 3.146346045 (error 0.15 percent).
-Serial correlation coefficient is 0.003103 (totally uncorrelated = 0.0).
+Arithmetic mean value of data bytes is 127.3139 (127.5 = random).
+Monte Carlo value for Pi is 3.149122807 (error 0.24 percent).
+Serial correlation coefficient is -0.000265 (totally uncorrelated = 0.0).
+
 ```
 
 Output as output image:
