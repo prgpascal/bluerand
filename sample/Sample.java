@@ -20,47 +20,62 @@ import com.prgpascal.bluerand.BlueRandException;
 
 
 /**
- * Sample class for BlueRand.
- * It provides samples for single and multiple runs.
+ * This class provides some samples for BlueRand.
  */
 public class Sample {    
     
     /** Main method */
     public static void main(String[] args){
+    	/* Simplest run test */
+    	simplestRunTest();
+    	
         /* Single run test */
         singleRunTest();
         
         /* Multiple runs test */
         multiRunTest();
+        
+        System.out.println("END.");
     }
     
     
     /**
-     * Execute a single run test (2 input images only).
-     * The output will be stored into "singleRun_ab.txt" and "singleRun_ab.bmp".
+     * Simplest run test. It uses 2 input images only.
+     * No output files or images will be created.
      */
-    public static void singleRunTest(){    	
+    public static void simplestRunTest(){
         BlueRand random = new BlueRand("sample/input/a.jpg", "sample/input/b.jpg");
-        random.createOutputFile(true);
-        random.setOutputFile("sample/output/singleRun_ab.txt");
-        random.createOutputImage(true);
-        random.setOutputImage("sample/output/singleRun_ab.bmp");
-        random.deleteInputFiles(false);
-        
         try {
-	        System.out.println("Single run started, please wait... ");
-	        ArrayList<Byte> output = random.generateRandom();
-	        System.out.println("Single run finished. Bytes generated: " + output.size());
+        	ArrayList<Byte> output = random.generateRandom();
+            System.out.println("Simplest run finished. Bytes generated: " + output.size());
         } catch(BlueRandException e){
-        	System.out.println(e.getMessage());
+        	e.printStackTrace();
         }
     }
     
     
     /**
-     * Make a multiple run (with more than 2 input images).
-     * It appends the output of each generation to the output files named "multiRuns_output.txt" 
-     * and "multiRuns_output.bmp".
+     * Execute a single run test (2 input images only).
+     * The output will be saved into external files.
+     * It will consider 2 LSB for each byte.
+     */
+    public static void singleRunTest(){    	
+        BlueRand random = new BlueRand("sample/input/a.jpg", "sample/input/b.jpg");
+        random.setOutputFile("sample/output/singleRun_ab.txt");
+        random.setOutputImage("sample/output/singleRun_ab.bmp");
+        random.considerTwoLSB(true);
+        try {
+	        ArrayList<Byte> output = random.generateRandom();
+	        System.out.println("Single run finished. Bytes generated: " + output.size());
+        } catch(BlueRandException e){
+        	e.printStackTrace();
+        }
+    }
+    
+    
+    /**
+     * Make a multiple run test (with more than 2 input images).
+     * It appends the output of each generation to output files named "multiRuns_output.txt" and "multiRuns_output.bmp".
      */
     public static void multiRunTest(){
         /* Input resources.
@@ -74,26 +89,20 @@ public class Sample {
         };
         
         BlueRand random = new BlueRand();
-        random.createOutputFile(true);
         random.setOutputFile("sample/output/multiRuns_output.txt");
-        random.createOutputImage(true);
-        random.overwriteOutputFile(false);
         random.setOutputImage("sample/output/multiRuns_output.bmp");
-        random.deleteInputFiles(false);  
-        
-        ArrayList<Byte> output = null;
+        random.overwriteOutputFile(false);  
+        //random.deleteInputFiles(true);
         try {
 	        for (String s : inputs){
 	            random.setInputImages("sample/input/"+s.charAt(0)+".jpg",
 	                                  "sample/input/"+s.charAt(1)+".jpg");      
-	            System.out.println("Multiple runs started, please wait...");
-	            output = random.generateRandom();
+	            ArrayList<Byte> output = random.generateRandom();
 	            System.out.println("run finished... Bytes generated: " + output.size());
 	        }
         } catch (BlueRandException e){
         	System.out.println(e.getMessage());
         }
-        System.out.println("Multiple runs finished.");
     }
     
 }

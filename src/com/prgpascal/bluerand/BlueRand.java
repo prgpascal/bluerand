@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.nio.charset.Charset;
 import java.lang.Math;
  
-
 public class BlueRand {
     
     // Input / Output
@@ -90,21 +89,21 @@ public class BlueRand {
     
     /**
      * Set the input images.
-     *
+     * 
      * @param inputImage1 first input image.
      * @param inputImage2 second input image.
      */
-    public void setInputImages(String inputImage1,
-                               String inputImage2){
+    public void setInputImages(String inputImage1, String inputImage2){
         this.inputImage1 = new File(inputImage1);
         this.inputImage2 = new File(inputImage2);
     }
     
     
     /**
-     * Consider two least significant bits.
+     * Consider two least significant bits (LSB).
+     * Default = FALSE.
      *
-     * @param consider set it as true if two least significant bits must be considered.
+     * @param consider set it as TRUE if two least significant bits must be considered.
      */
     public void considerTwoLSB(boolean consider){
         this.considerTwoLSB = consider;
@@ -112,50 +111,34 @@ public class BlueRand {
     
     
     /**
-     * Save the output bytes to an external File.
-     *
-     * @param create true if the output must be saved to external File.
-     */
-    public void createOutputFile(boolean create){
-        this.createOutputFile = create;
-    }
-    
-    
-    /**
      * Set the output resource File.
+     * If not set no output File will be created.
      *
      * @param path the path to the output File.
      */
     public void setOutputFile(String path){
         outputFile = new File(path);
-    }
-    
-    
-    /**
-     * Create an output image containing the random bytes.
-     *
-     * @param create true if the output image must be created.
-     */
-    public void createOutputImage(boolean create){
-        this.createOutputImage = create;
+        createOutputFile = true;
     }
     
     
     /**
      * Set the output image resource File.
+     * If not set no output image will be created.
      *
      * @param path the path to the output image File.
      */
     public void setOutputImage(String path){
         outputImage = new File(path);
+        createOutputImage = true;
     }
     
     
     /**
-     * Overwrite the output resource File with the new random bytes generated.
-     * Default value = true.
+     * Overwrite the output resource File with the generated random bytes.
+     * Default = TRUE.
      *
-     * @param path true if the output File must be overwritten.
+     * @param path TRUE if the output File must be overwritten.
      */
     public void overwriteOutputFile(boolean overwrite){
         this.overwriteOutputFile = overwrite;
@@ -163,9 +146,10 @@ public class BlueRand {
     
     
     /**
-     * Delete or not the input file after the number generation.
+     * Delete or not the input file after the generation.
+     * Default = FALSE.
      *
-     * @param delete true if the input files must be deleted after the number generation.
+     * @param delete TRUE if the input files must be deleted after the generation.
      */
     public void deleteInputFiles(boolean delete){
         this.deleteInputFiles = delete;
@@ -201,15 +185,15 @@ public class BlueRand {
         if ((img1.getWidth() != img2.getWidth()) ||
             (img1.getHeight() != img2.getHeight())){
         	
-        	// Input images have different sizes!
-        	throw new BlueRandException("Wrong input images size");
+        	// Input images have different resolutions!
+        	throw new BlueRandException("Input images have different resolutions!");
         }
         
         // Params
         int width = img1.getWidth();
         int heigth = img1.getHeight();
             
-        // set the max/min delay
+        // Set the max/min delay
         delayMax = (int) Math.log(width*heigth);
         delayMin = delayMax/2;
                     
@@ -238,7 +222,7 @@ public class BlueRand {
       	}
 
         // Write to Output file
-        try{    
+        try {    
 	        if (createOutputFile){
 	            OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(outputFile, !overwriteOutputFile), Charset.forName("ISO-8859-1"));
 	            for (Byte s : bytes){
@@ -255,10 +239,10 @@ public class BlueRand {
         // Write to Output image
         if (createOutputImage){
             if (!overwriteOutputFile){
-                // apppend to an existing one
+                // Append to an existing image
                 new CreateOutputImage(outputImage, outputFile).create();
             } else {
-                // Create new
+                // Create new output image
                 new CreateOutputImage(outputImage, bytes).create();
             }
         }
@@ -272,7 +256,6 @@ public class BlueRand {
         	
         // Finished!
         return bytes;
-       
     }
     
     
@@ -304,7 +287,7 @@ public class BlueRand {
         }
         
         
-        // New bit value
+        // New bit value (simple XOR operation)
         int newValue = (c1%2)^(c2%2);
         
         // Calculate new delay (how many future pixel must be ignored)
@@ -314,7 +297,7 @@ public class BlueRand {
                
         
         /*
-         * Add the bit to the buffer byte.
+         * Add the resulting bit to the buffer byte
          * http://stackoverflow.com/questions/4844342/change-bits-value-in-byte
          */
         if (newValue == 0){

@@ -17,6 +17,8 @@
 package com.prgpascal.bluerand;
 
 public class BlueRandException extends Exception {
+	private static final long serialVersionUID = 1L;
+
 	public BlueRandException(String message){
 		super("BlueRandException: " + message);
 	}
