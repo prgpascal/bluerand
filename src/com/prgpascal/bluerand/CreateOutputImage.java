@@ -31,7 +31,6 @@ import java.lang.Math;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
  
-
 public class CreateOutputImage {
     // Input / Output
     private File outputImage;
@@ -42,11 +41,11 @@ public class CreateOutputImage {
     /**
      * Constructor.
      *
-     * @param output the output File.
+     * @param output the output image.
      * @param bytes the input bytes.
      */
-    public CreateOutputImage(File output, ArrayList<Byte> bytes){
-        this.outputImage = output;
+    public CreateOutputImage(File outputImage, ArrayList<Byte> bytes){
+        this.outputImage = outputImage;
         this.bytes = bytes;
     }
     
@@ -54,11 +53,11 @@ public class CreateOutputImage {
     /**
      * Constructor.
      *
-     * @param output the output File.
+     * @param output the output image.
      * @param bytes the input File that contains random bytes.
      */
-    public CreateOutputImage(File output, File inputFile){
-        this.outputImage = output;
+    public CreateOutputImage(File outputImage, File inputFile){
+        this.outputImage = outputImage;
         this.inputFile = inputFile;
     }
     
@@ -66,7 +65,7 @@ public class CreateOutputImage {
     /**
      * Create the output image.
      *
-     * @return true if the image is created succesfully.
+     * @return TRUE if the image is successfully created.
      */
     public boolean create(){
         
@@ -79,10 +78,11 @@ public class CreateOutputImage {
             // Create new outputImage
             outputImage.createNewFile();
             
-            // Check if I need to read bytes from input file
+            // Check if I need to read bytes from input File
             if (inputFile != null){
-                // Must read random bytes from external File.
-                readFromInputFile();
+                // Read the random bytes from input File.
+            	bytes = new ArrayList<Byte>();
+                readFromInputFile(bytes);
             }
 
             // Output image size
@@ -120,12 +120,12 @@ public class CreateOutputImage {
 
     
     /**
-     * Create a grayscale output image.
+     * Create a gray-scale output image.
      *
      * @param width the width of the output image.
      * @param height the height of the output image.
      * @param buffer the input bytes.
-     * @return output grayscale BufferedImage.
+     * @return output gray-scale BufferedImage.
      */
     private BufferedImage getGrayscale(int width, int height, byte[] buffer) {
         ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
@@ -142,13 +142,10 @@ public class CreateOutputImage {
     
     
     /**
-     * Read the random bytes from an external input File and store them into
-     * an ArrayList<Byte>.
+     * Read the random bytes from an input File and store them into an ArrayList<Byte>.
      */
-    private boolean readFromInputFile(){
-        // Instantiate the ArrayList
-        bytes = new ArrayList<Byte>();
-      
+    private boolean readFromInputFile(ArrayList<Byte> bytes){
+        
         try{
             FileInputStream in = new FileInputStream(inputFile);
             byte[] tmp = new byte[1];
