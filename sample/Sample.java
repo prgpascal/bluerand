@@ -63,7 +63,7 @@ public class Sample {
         BlueRand random = new BlueRand("sample/input/a.jpg", "sample/input/b.jpg");
         random.setOutputFile("sample/output/singleRun_ab.txt");
         random.setOutputImage("sample/output/singleRun_ab.bmp");
-        random.considerTwoLSB(true);
+        random.considerTwoLSB(false);
         try {
 	        ArrayList<Byte> output = random.generateRandom();
 	        System.out.println("Single run finished. Bytes generated: " + output.size());
@@ -86,6 +86,10 @@ public class Sample {
         String[] inputs = new String[]{
             "ab",
             "cd",
+            "ef",
+            "gh",
+            "il",
+            "mn"
         };
         
         BlueRand random = new BlueRand();
@@ -96,7 +100,7 @@ public class Sample {
         try {
 	        for (String s : inputs){
 	            random.setInputImages("sample/input/"+s.charAt(0)+".jpg",
-	                                  "sample/input/"+s.charAt(1)+".jpg");      
+	                                  "sample/input/"+s.charAt(1)+".jpg"); 
 	            ArrayList<Byte> output = random.generateRandom();
 	            System.out.println("run finished... Bytes generated: " + output.size());
 	        }
