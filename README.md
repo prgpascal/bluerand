@@ -36,11 +36,15 @@ random.deleteInputFiles(true);
 ##Tests
 An [ENT](http://www.fourmilab.ch/random/) test result:
 
-![noise](tests/ent_test.PNG)
+![test-ent](tests/ent_test.PNG)
 
-The random bytes as image:
+The output random bytes as image:
 
 ![noise](https://github.com/prgpascal/bluerand/blob/master/sample/output/multiRuns_output.bmp)
+
+A [RaBiGeTe MT](http://cristianopi.altervista.org/RaBiGeTe_MT/) test result:
+
+![test-rabigete](tests/rabigete_test.PNG)
 
 ## License
 	Copyright 2016 Riccardo Leschiutta
