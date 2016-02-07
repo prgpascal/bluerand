@@ -46,6 +46,14 @@ A [RaBiGeTe MT](http://cristianopi.altervista.org/RaBiGeTe_MT/) test result:
 
 ![test-rabigete](tests/rabigete_test.PNG)
 
+Occurrences:<br>
+
+![test-occurrences](tests/occurrences_test.PNG)
+
+X-axis: output bytes, defined as numbers between 0 and 255.<br>
+Y-axis: number of occurrences of output bytes.
+
+
 ## License
 	Copyright 2016 Riccardo Leschiutta
 
