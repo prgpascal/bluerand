@@ -36,8 +36,7 @@ public class CreateOutputImage {
     private File outputImage;
     private ArrayList<Byte> bytes;
     private File inputFile;
-    
-    
+      
     /**
      * Constructor.
      *
@@ -49,7 +48,6 @@ public class CreateOutputImage {
         this.bytes = bytes;
     }
     
-    
     /**
      * Constructor.
      *
@@ -60,12 +58,11 @@ public class CreateOutputImage {
         this.outputImage = outputImage;
         this.inputFile = inputFile;
     }
-    
-    
+     
     /**
      * Create the output image.
      *
-     * @return TRUE if the image is successfully created.
+     * @return TRUE if the image is successfully created, FALSE otherwise.
      */
     public boolean create(){
         
@@ -117,7 +114,6 @@ public class CreateOutputImage {
         
         return false;
     }
-
     
     /**
      * Create a gray-scale output image.
@@ -139,7 +135,6 @@ public class CreateOutputImage {
 
         return result;
     }
-    
     
     /**
      * Read the random bytes from an input File and store them into an ArrayList<Byte>.

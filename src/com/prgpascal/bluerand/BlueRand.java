@@ -57,12 +57,10 @@ public class BlueRand {
     private int delayMax;
     private SecureRandom random;
     
-    
     /** 
      * Empty constructor.
      */
-    public BlueRand(){}
-    
+    public BlueRand(){} 
     
     /** 
      * Constructor. 
@@ -74,7 +72,6 @@ public class BlueRand {
         this.inputImage1 = inputImage1;
         this.inputImage2 = inputImage2;        
     }
-     
     
     /** 
      * Constructor. 
@@ -86,7 +83,6 @@ public class BlueRand {
     	this(new File(inputImage1), new File(inputImage2));
     }
     
-    
     /**
      * Set the input images.
      * 
@@ -96,8 +92,7 @@ public class BlueRand {
     public void setInputImages(String inputImage1, String inputImage2){
         this.inputImage1 = new File(inputImage1);
         this.inputImage2 = new File(inputImage2);
-    }
-    
+    }   
     
     /**
      * Consider two least significant bits (LSB).
@@ -109,22 +104,20 @@ public class BlueRand {
         this.considerTwoLSB = consider;
     }
     
-    
     /**
      * Set the output resource File.
-     * If not set no output File will be created.
+     * If not set, no output File will be created.
      *
-     * @param path the path to the output File.
+     * @param path the path of the output File.
      */
     public void setOutputFile(String path){
         outputFile = new File(path);
         createOutputFile = true;
     }
     
-    
     /**
      * Set the output image resource File.
-     * If not set no output image will be created.
+     * If not set, no output image will be created.
      *
      * @param path the path to the output image File.
      */
@@ -132,8 +125,7 @@ public class BlueRand {
         outputImage = new File(path);
         createOutputImage = true;
     }
-    
-    
+     
     /**
      * Overwrite the output resource File with the generated random bytes.
      * Default = TRUE.
@@ -144,7 +136,6 @@ public class BlueRand {
         this.overwriteOutputFile = overwrite;
     }
     
-    
     /**
      * Delete or not the input file after the generation.
      * Default = FALSE.
@@ -153,8 +144,7 @@ public class BlueRand {
      */
     public void deleteInputFiles(boolean delete){
         this.deleteInputFiles = delete;
-    }
-    
+    } 
     
     /**
      * Start the generator.
@@ -256,8 +246,7 @@ public class BlueRand {
         	
         // Finished!
         return bytes;
-    }
-    
+    } 
     
     /**
      * Add a single bit to output bytes.
@@ -317,7 +306,6 @@ public class BlueRand {
         }
     }
     
-   
     /**
      * Encode a byte array into a ISO-8859-1 String.
      *
