@@ -3,7 +3,7 @@
 # BlueRand
 Java True Random Number Generator (TRNG) that uses JPEG images as entropy source.
 
-##How it works
+## How it works
 * It uses two different input images (with the same resolution). These images are considered independent because captured in two different moments. 
 * It use the [Mixing technique](https://tools.ietf.org/html/rfc4086#section-5), so the output will be unpredictable if at least one  of two images is unpredictable.
 * Only some of the total amount of pixels are considered. The CSPRNG [SecureRandom](https://docs.oracle.com/javase/7/docs/api/java/security/SecureRandom.html) sets for each considered pixel how many consecutive pixels have to be discarded. In this manner the correlation between consecutive pixels is avoided. This also guarantees that if the generator is run twice two different outputs will be generated.
@@ -22,7 +22,7 @@ try {
 ```
 Please check [here](sample/Sample.java) for more samples.
 
-##Customize options
+## Customize options
 ```java
 BlueRand random = new BlueRand();
 random.setInputImages("sample/input/a.jpg", "sample/input/b.jpg");
@@ -33,22 +33,22 @@ random.overwriteOutputFile(true);
 random.deleteInputFiles(true);
 ```
 
-##Tests
+## Tests
 An [ENT](http://www.fourmilab.ch/random/) test result:
 
-![test-ent](tests/ent_test.PNG)
+![test-ent](test_results/ent_test.PNG)
 
 The output random bytes as image:
 
-![noise](https://github.com/prgpascal/bluerand/blob/master/sample/output/multiRuns_output.bmp)
+![noise](sample/output/multiRuns_output.bmp)
 
 A [RaBiGeTe MT](http://cristianopi.altervista.org/RaBiGeTe_MT/) test result:
 
-![test-rabigete](tests/rabigete_test.PNG)
+![test-rabigete](test_results/rabigete_test.PNG)
 
 Occurrences:<br>
 
-![test-occurrences](tests/occurrences_test.PNG)
+![test-occurrences](test_results/occurrences_test.PNG)
 
 X-axis: output bytes, defined as numbers between 0 and 255.<br>
 Y-axis: number of output bytes occurrences.
